@@ -63,10 +63,10 @@ app.get('/menu', (req,res) => {
 
 app.get('/menu/:category', (req, res) => {
     res.locals.RESTAURANT = RESTAURANT;
-    const index = req.params.itemID
-    res.render('category.ejs', {
-        item: RESTAURANT[index]
-    });
+    const category = req.params.category
+    const menuItems =  RESTAURANT.menu.filter(item => item.category === category);
+    res.locals.menuItems = menuItems
+    res.render('category.ejs');
 });
 
 app.listen(3000);
